@@ -533,7 +533,7 @@ function calculateStunting() {
     `Status Berat Badan Terhadap Usia: ${resultWeightAge}`;
 
   // 2. Tinggi Badan terhadap Usia
-  let resultHeightAge = calculateZScore(zScoresHeightAge[gender][age], height);
+  let resultHeightAge = calculateZScore2(zScoresHeightAge[gender][age], height);
   document.getElementById('result-height-age').textContent =
     `Status Tinggi Badan Terhadap Usia: ${resultHeightAge}`;
 
@@ -565,6 +565,21 @@ function calculateZScore(data, value) {
   if (zScore >= -3 && zScore < -2) return "Wasted (Kurus)";
   if (zScore >= -2 && zScore <= 2) return "Normal";
   return "Overweight (Gemuk)";
+}
+
+function calculateZScore2(data, value) {
+  if (!data) return "Data tidak tersedia";
+  if ((value - data.median) > 0) {
+    zScore = (value - data.median) / (data.sd2 - data.median);
+  } else if ((value - data.median) < 0){
+    zScore = (value - data.median) / (data.median - data.sd1);
+  } else {
+    return "Tidak terdefinisi"
+  }
+
+  if (zScore < -2) return "Stunted (Pendek)";
+  if (zScore >= -2 && zScore <= 2) return "Normal";
+  return "Tall (Tinggi)";
 }
 
 function resetForm() {
