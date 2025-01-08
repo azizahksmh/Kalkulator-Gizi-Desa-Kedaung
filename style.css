@@ -44,7 +44,7 @@ h1 {
 input, select {
   margin: 10px 0;
   padding: 10px;
-  font-size: 0.85rem;
+  font-size: 1rem;
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 5px;
